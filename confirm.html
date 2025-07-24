@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Email Verification</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 60px;
+      background: #fff8e1;
+      text-align: center;
+      color: #333;
+    }
+    .message {
+      font-size: 1.3rem;
+      margin: 20px 0;
+    }
+    .button {
+      margin-top: 30px;
+      padding: 12px 25px;
+      background-color: #ffca28;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s;
+    }
+    .button:hover {
+      background-color: #ffc107;
+    }
+  </style>
+</head>
+<body>
+  <h1>Email Verification</h1>
+
+  <div id="message" class="message">Processing...</div>
+
+  <button class="button" id="homeBtn" style="display:none;">Go to Login</button>
+
+  <script>
+    // Helper to get query parameters from URL
+    function getQueryParams() {
+      const params = {};
+      location.search
+        .substring(1)
+        .split("&")
+        .forEach(pair => {
+          const [key, value] = pair.split("=");
+          if (key) params[decodeURIComponent(key)] = decodeURIComponent(value || "");
+        });
+      return params;
+    }
+
+    const messageEl = document.getElementById("message");
+    const homeBtn = document.getElementById("homeBtn");
+    const params = getQueryParams();
+
+    // Determine what to display based on query params (basic example)
+    if (params['type'] === 'recovery') {
+      messageEl.textContent = "Password recovery email verification successful!";
+      homeBtn.style.display = 'inline-block';
+    } else if (params['type'] === 'signup') {
+      messageEl.textContent = "Your email has been verified successfully!";
+      homeBtn.style.display = 'inline-block';
+    } else if (params['error_description']) {
+      messageEl.textContent = "Verification error: " + params['error_description'];
+      homeBtn.style.display = 'inline-block';
+    } else {
+      messageEl.textContent = "Your email has been verified! You can now proceed to login.";
+      homeBtn.style.display = 'inline-block';
+    }
+
+    homeBtn.onclick = () => {
+      window.location.href = '/login';  // change this path to your login page URL
+    };
+  </script>
+</body>
+</html>
