@@ -36,7 +36,7 @@
 
   <div id="message" class="message">Processing...</div>
 
-  <button class="button" id="homeBtn" style="display:none;">Go to Login</button>
+  <button class="button" id="homeBtn" style="display:none;">Open app and login</button>
 
   <script>
     // Helper to get query parameters from URL
@@ -70,10 +70,6 @@
       messageEl.textContent = "Your email has been verified! You can now proceed to login.";
       homeBtn.style.display = 'inline-block';
     }
-
-    homeBtn.onclick = () => {
-      window.location.href = '/login';  // change this path to your login page URL
-    };
   </script>
 </body>
 </html>
